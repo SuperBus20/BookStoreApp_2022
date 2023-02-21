@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RepositoryService } from './repository.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,16 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'BoardGameWebApp_2022';
+
+  constructor(private repositoryService:RepositoryService) {}
+
+  boardGame:any=''
+  ngOnInit(): void {
+    this.getGames();
+  }
+
+  getGames(){
+    this.repositoryService.getBoardGames().subscribe(
+      (response)=>{this.boardGame = response});
+  }
 }
